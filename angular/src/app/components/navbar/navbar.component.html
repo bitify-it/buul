@@ -1,0 +1,27 @@
+<nav>
+    <div class="left-area" >
+        <div class="sidebar-icon-mobile"><i [@rotatedState]='state' (click)="toggleSideBarFronNavbarMobile()" class="pi pi-bars" ></i></div>
+        <div class="navbar-title global-font">Fioraio</div>
+        <div class="sidebar-icon"><i [@rotatedState]='state' (click)="toggleSideBarFronNavbar()" class="pi pi-chevron-left" ></i></div>
+    </div>
+    <div class="right-area">
+        <div class="right-area-item"><p-avatar icon="pi pi-bell" pBadge value="4" severity="danger" (click)="notifications.toggle($event)" styleClass="p-mr-2" size="large" 
+            [style]="{'background-color':'#2196F3', 'color': '#ffffff','overflow': 'unset'}" shape="circle"></p-avatar>
+        </div>
+        <div class="right-area-item">
+            <p-avatar (click)="profile.toggle($event)" image="assets/images/user.jpg" styleClass="p-mr-2" size="large" shape="circle"></p-avatar>
+        </div>
+    </div>
+</nav>
+
+<p-overlayPanel  #notifications [style]="{width: '300px'}">
+    <app-notification-panel></app-notification-panel>
+</p-overlayPanel>
+
+<p-overlayPanel  #profile >
+    <app-userprofile-panel></app-userprofile-panel>
+</p-overlayPanel>
+
+
+
+ 

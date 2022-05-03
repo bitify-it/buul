@@ -1,0 +1,34 @@
+.container{
+    display: flex;
+    min-height: calc(100vh - 0px);
+}
+.container .main-body{
+    position: relative;
+    width: calc(100% - 252px);
+    transition: all 0.5s;
+}
+.container aside{
+    width: 252px;
+    overflow-y: auto;
+    transition: all 0.5s;
+    background-color: #ebebef;
+}
+.container aside.expanding{
+    width: 51px;
+}
+.container .body-expanding{
+    width: calc(100% - 52px);
+}
+
+.main-body{
+    padding: 15px;
+    margin-top: 80px;
+}
+
+.container .login-body{
+    background-color: rgb(182, 40, 40);
+    width: 100%
+}
+
+
+   

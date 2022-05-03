@@ -1,0 +1,141 @@
+<p-card class="monitoring"  [hidden]="loading">
+    <h2>{{info.app.name }} <span>v:{{info.app.version}}</span></h2>
+    <p class="descrizione" >{{info.app.description}}</p>
+    <div class="p-fluid formgrid grid text-center">
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <h4>Server Status</h4>
+            <p-tag styleClass="p-mr-2" [severity]="serverStatusSeverity" [value]="serverStatus" [rounded]="true"></p-tag>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <h4>Database Status</h4>
+            <p-tag styleClass="p-mr-2" severity="success" [value]="databaseStatus" [rounded]="true"></p-tag>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <h4>Ping Status</h4>
+            <p-tag styleClass="p-mr-2" severity="success" [value]="pingStatus" [rounded]="true"></p-tag>
+        </div>
+
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <h4>Disk Space Status</h4>
+            <p-tag styleClass="p-mr-2" severity="success" [value]="diskSpaceStatus" [rounded]="true" ></p-tag>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <h4>Disk Space Total</h4>
+            <p-tag styleClass="p-mr-2" severity="info" [value]="diskSpaceTotalGB" [rounded]="true"></p-tag>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <h4>Numero CPU</h4>
+            <p-tag styleClass="p-mr-2" severity="info" [value]="cpuCount" [rounded]="true" ></p-tag>
+        </div>
+
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <h4>Disk Space Free</h4>
+            <p-knob [(ngModel)]="diskSpaceFree" [readonly]="true" [min]="0" [max]="diskSpaceTotal"></p-knob>
+	    <p>{{diskSpaceTotal}} GB</p>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <h4>Utilizzo CPU</h4>
+            <p-knob [(ngModel)]="cpuUsage" [readonly]="true" [min]="0" [max]="1" [showValue]="false"></p-knob>
+            <p>{{cpuUsage}}/1</p>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <h4>Utilizzo Memoria</h4>
+            <p-knob [(ngModel)]="memoryUsage" [readonly]="true" [min]="0" [max]="memoryMax" [showValue]="false"></p-knob>
+            <p>{{memoryUsage}}/{{memoryMax}}</p>
+        </div>
+    </div>
+
+    <h2>Metriche</h2>
+    <p-accordion>
+        <div class="p-fluid formgrid grid text-center">
+            <ng-template ngFor let-item [ngForOf]="metrics" let-i="index">
+                <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+                    <p-accordionTab [header]="item" (click)="openMetric(item)">
+                        <pre style="text-align: left;">{{fullMetric | json}}</pre>
+                    </p-accordionTab>
+                </div>
+            </ng-template>
+        </div>
+    </p-accordion>
+
+</p-card>
+
+<p-card class="monitoringSk" [hidden]="!loading">
+    <p-skeleton width="10rem" height="2rem" styleClass="mb-3"></p-skeleton>
+    <div class="p-fluid formgrid grid text-center">
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-4">
+            <p-skeleton width="100%" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+        <div class="field col-12 md:col-12 lg:col-6 xl:col-6">
+            <p-skeleton width="100%" height="1.2rem" styleClass="p-mb-2"></p-skeleton>
+        </div>
+    </div>
+</p-card>
+
+

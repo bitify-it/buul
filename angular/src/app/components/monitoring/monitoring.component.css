@@ -1,0 +1,21 @@
+
+:host ::ng-deep .monitoring .p-tag-value {
+    font-size: large;
+    padding: 2px 20px;
+}
+.monitoring h2{
+    text-align: center;
+}
+.monitoring h2 span{
+    font-size: 14px;
+    color: indianred;
+}
+.monitoring .descrizione{
+    text-align: center;
+    font-size: 12px;
+    margin-top: -10px;
+}
+
+.monitoringSk{
+    text-align: center;
+}

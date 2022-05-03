@@ -1,0 +1,102 @@
+<p-toast position="top-center"></p-toast>
+
+<div class="center">
+    <div id="center-intern">
+        <p-card>
+            <form name="form" (ngSubmit)="f.form.valid && accedi()" #f="ngForm"  novalidate *ngIf="mode==0">
+                <div class="form-group login-form">
+                    <!-- ************ LOGIN ****************-->
+                    <h4>LogIn</h4>
+                    <h5 *ngIf="isNewPasswordDone">Password impostata correttamente. </h5>
+                    <h5 class="p-error" *ngIf="isLoginFailed">Username e/o Password errate </h5>
+                    <div class="p-fluid grid">
+                        <div class="field col-12">
+                            <span class="p-float-label p-input-icon-right p-field">
+                                <i class="pi pi-user"></i>
+                                <input type="text" pInputText [(ngModel)]="form.username" aria-describedby="username2-help" required #username="ngModel" name="username"> 
+                                <label for="float-input">Username</label>
+                            </span>
+                            <small id="username2-help" class="p-error" style="display: block;" *ngIf="username.errors && f.submitted">
+                                Username è obbligatoria.
+                            </small>
+                        </div>
+                        <div class="field col-12">
+                            <span class="p-float-label">
+                                <p-password [toggleMask]="true" name="password"
+                                [(ngModel)]="form.password"
+                                required
+                                minlength="6"
+                                #password="ngModel" [feedback]="false"></p-password>
+                                <label for="float-input">Password</label>
+                            </span>
+                            <small id="username2-help" class="p-error" style="display: block;" *ngIf="password.errors && f.submitted">
+                                Password è obbligatoria.
+                            </small>
+                        </div>
+                    </div>
+                    <button pButton type="button" label="Accedi" class="p-button-info mt-3" type="submit"></button>
+                    <h6 style="cursor: pointer;" (click)="requestNewPwd()">Ho dimenticato la password?</h6>
+                    <!-- ************ END LOGIN ****************-->
+                </div>
+            </form>
+
+            <!-- ************ RESET PWD ****************-->
+            <form name="formReset" (ngSubmit)="f2.form.valid && resetPwd()" #f2="ngForm"  novalidate *ngIf="mode==1">
+                <h4>Reset Password</h4>
+                <h5 class="p-error">{{errorReset}}</h5>
+                <div class="p-fluid grid">
+                    <div class="field col-12">
+                        <span class="p-float-label p-input-icon-right p-field">
+                            <i class="pi pi-user"></i>
+                            <input type="text" pInputText [(ngModel)]="formReset.email" aria-describedby="email-help" required #email="ngModel" name="email"> 
+                            <label for="float-input">Email</label>
+                        </span>
+                        <small id="email-help" class="p-error" style="display: block;" *ngIf="email.errors && f2.submitted">
+                            Email è obbligatoria.
+                        </small>
+                    </div>
+                </div>
+                <button pButton type="button" label="Richiedi Reset" class="p-button-info mt-3" type="submit"></button>
+            </form>
+            <!-- ************ END RESET PWD ****************-->
+
+            <!-- ************ NEW PWD ****************-->
+            <form name="formNewPwd" (ngSubmit)="f3.form.valid && newPwd()" #f3="ngForm"  novalidate *ngIf="mode==2">
+                <h4>Inserisci il PIN ricevuto via email e la nuova Password</h4>
+                <h5 class="p-error">{{errorReset}}</h5>
+                <div class="p-fluid grid">
+                    <div class="field col-12">
+                        <span class="p-float-label p-input-icon-right p-field">
+                            <i class="pi pi-sort-numeric-up"></i>
+                            <input type="text" pInputText [(ngModel)]="formNewPwd.pin" aria-describedby="pin-help" required #pin="ngModel" name="pin"> 
+                            <label for="float-input">PIN</label>
+                        </span>
+                        <small id="pin-help" class="p-error" style="display: block;" *ngIf="pin.errors && f3.submitted">
+                            Pin è obbligatorio.
+                        </small>
+                    </div>
+                    <div class="field col-12">
+                        <span class="p-float-label">
+                            <p-password [toggleMask]="true" name="newPassword"
+                            [(ngModel)]="formNewPwd.newPassword"
+                            required
+                            minlength="6"
+                            #newPassword="ngModel" [feedback]="false"></p-password>
+                            <label for="float-input">Nuova Password</label>
+                        </span>
+                        <small id="newPassword-help" class="p-error" style="display: block;" *ngIf="newPassword.errors && f3.submitted">
+                            Password è obbligatoria.
+                        </small>
+                    </div>
+                </div>
+                
+                <button pButton type="button" label="Conferma" class="p-button-info mt-3" type="submit"></button>
+            </form>
+            <!-- ************ END NEW PWD ****************-->
+             
+        </p-card>
+    </div>
+</div>
+
+
+

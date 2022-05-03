@@ -1,0 +1,9 @@
+.sec-role-details .p-disabled, .sec-role-details .p-component:disabled {
+    opacity: 0.78 !important;
+}
+
+:host ::ng-deep .p-component:disabled {
+    opacity: 0.78 !important;
+}
+
+

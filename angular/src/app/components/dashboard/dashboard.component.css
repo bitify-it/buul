@@ -1,0 +1,22 @@
+.card-statistiche{
+    display: flex;
+    color: #626262;
+}
+.card-statistiche .card-icon{
+    margin-right: 20px;
+    margin-left: 15px;
+    margin-top: 5px;
+    color:var(--color-main);
+}
+.card-statistiche .card-body{
+    width: 100%;
+    text-align: right;
+    margin-right: 15px;
+    margin-top: 5px;
+}
+.card-statistiche .card-titolo{
+    font-size: 1.3rem;
+}
+.card-statistiche .card-valore{
+    font-size: 2.5rem;
+}

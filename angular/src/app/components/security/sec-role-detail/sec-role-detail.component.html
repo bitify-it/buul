@@ -1,0 +1,138 @@
+<p-toast position="top-center"></p-toast>
+<p-card class="sec-role-details details" [hidden]=(loading)>
+
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <i id="back-icon" class="pi pi-chevron-circle-left mr-3" style="font-size: 1.8rem;cursor: pointer;" (click)="back()" pTooltip="Indietro" tooltipPosition="top"></i>
+            <h2>Ruolo: {{secRole.name}}</h2>
+            <i id="status-icon" class="pi pi-lock ml-2" style="font-size: 1.4rem;"></i>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <div class="d-flex flex-wrap">
+                <button pButton pRipple label="Modifica" icon="pi pi-pencil" class="p-button-info mr-2 mb-2" (click)="enableEdit()" [hidden]=(edit)></button>
+                <button pButton pRipple label="Annulla" icon="pi pi-times" class="p-button-info mr-2 mb-2" (click)="disableEdit()" [hidden]=(!edit)></button>
+                <button pButton pRipple label="Salva" icon="pi pi-save" class="p-button-success mr-2 mb-2" (click)="save()" [hidden]=(!edit)></button>
+                <button pButton pRipple label="Elimina" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)="deleteElement(secRole)" [hidden]=(!edit)></button>
+            </div>
+        </ng-template>
+    </p-toolbar>
+    
+    <div class="p-fluid formgrid grid">
+        
+        <div class="field col-12 md:col-12 lg:col-12 xl:col-6">
+            <label for="id">Id</label>
+            <p-inputNumber id="id" inputId="integeronly" [(ngModel)]="secRole.id" [disabled]="!edit" ></p-inputNumber>
+        </div>
+
+        <div class="field col-12 md:col-12 lg:col-12 xl:col-6">
+            <label for="name">Name</label>
+            <input id="name" type="text" pInputText [(ngModel)]="secRole.name" [disabled]="!edit" required > 
+            <small class="p-invalid" *ngIf="submitted && secRoleValidation.controls['name'].errors">{{getValidationMessage(secRoleValidation.controls.name)}}</small>
+        </div>
+
+    </div>
+    <p-tabView>
+
+
+    <p-tabPanel header="Privilegi">    <p-table #dt [value]="secRole.secPrivileges" [rows]="10" [paginator]="true" [loading]="loading"
+        [rowsPerPageOptions]="[10,25,50,100]" [(selection)]="selectedSecRoles" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Elementi da {first} a {last} di {totalRecords} elementi totali" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <button pButton pRipple [hidden]="!edit" icon="pi pi-plus" class="p-button-rounded p-button-primary p-button-text" (click)="setSecPrivileges()" style="float:right" pTooltip="Aggiungi" tooltipPosition="left"></button>
+                <h3 class="mb-2">Lista dei Privilegi</h3>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>  </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-secPrivilege>
+            <tr>
+              <td>{{secPrivilege.id}}</td>
+              <td>{{secPrivilege.name}}</td>
+                <td>
+                    <button pButton pRipple [hidden]="!edit" icon="pi pi-trash" class="p-button-rounded p-button-primary p-button-text" (click)="removeSecPrivilege(secPrivilege)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-dialog [(visible)]="secPrivilegeDialog" [style]="{width: '850px'}" header="Relazione SecRole" [modal]="true" styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <p-table #dt [value]="secPrivileges" [rows]="10" [paginator]="true" [loading]="loading"
+                [globalFilterFields]="['name']"
+                [rowsPerPageOptions]="[10,25,50,100]" [(selection)]="selectedSecPrivileges" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Cerca..." />
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+              <th pSortableColumn="id">Id<p-sortIcon field="id"></p-sortIcon></th>
+              <th pSortableColumn="name">Name<p-sortIcon field="id"></p-sortIcon></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-secPrivilege>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="secPrivilege"></p-tableCheckbox>
+                        </td>
+              <td>{{secPrivilege.id}}</td>
+              <td>{{secPrivilege.name}}</td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        Elementi totali: {{totalRecordsSecPrivilege}}
+                    </div>
+                </ng-template>
+            </p-table>
+        </ng-template>
+        
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Annulla" icon="pi pi-times" class="p-button-text" (click)="hideDialogSecPrivilege()"></button>
+            <button pButton pRipple label="Aggiungi" icon="pi pi-check" class="p-button-text" (click)="addSecPrivilegesToSecRole()"></button>
+        </ng-template>
+    </p-dialog></p-tabPanel>
+ 
+    </p-tabView>
+
+    <p-confirmDialog [style]="{width: '550px'}" acceptLabel="Si"></p-confirmDialog>
+
+</p-card>
+
+<p-card [hidden]="!loading">
+    <div class="skeleton" >
+        <div class="grid formgrid">
+            <div class="field col-12 md:col-12 lg:col-12 xl:col-6">
+                <p-skeleton width="10rem" height="1rem" styleClass="mb-4"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  ></p-skeleton>
+            </div>
+            <div class="field col-12 md:col-12 lg:col-12 xl:col-6">
+                <p-skeleton width="10rem" height="1rem" styleClass="mb-4"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  ></p-skeleton>
+            </div>
+        </div>
+    </div>
+</p-card>

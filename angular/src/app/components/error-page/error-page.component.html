@@ -1,0 +1,11 @@
+<div class="p-fluid grid mt-5" style="text-align: center;">
+    <div class="col-12 md:col-12 lg:col-3 xl:col-3"></div>
+    <div class="col-12 md:col-12 lg:col-6 xl:col-6">
+        <p-card [header]="errorCode">
+            <p>{{errorMessage}}</p>
+            <p-button label="Indietro" (click)="back();"></p-button>
+            <p-button label="Riprova" (click)="reload();" styleClass="mt-2"></p-button>
+        </p-card>
+    </div>
+    <div class="col-12 md:col-12 lg:col-3 xl:col-3"></div>
+</div>

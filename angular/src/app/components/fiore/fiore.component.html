@@ -1,0 +1,92 @@
+<p-toast position="top-center"></p-toast>
+
+<div class="card" *ngIf="!errorCode">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nuovo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()" pTooltip="Crea nuovo" tooltipPosition="bottom" *ngIf="secCheck('CREATE')"></button>
+            <button pButton pRipple label="" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedElements()" [disabled]="!selectedFiores || !selectedFiores.length" pTooltip="Elimina selezionati" tooltipPosition="bottom" *ngIf="secCheck('DELETE_ALL')"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <!--<p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload>-->
+            <button pButton pRipple label="Pdf" icon="pi pi-file-pdf" class="p-button-info" (click)="downloadReport('pdf')" pTooltip="Scarica Pdf" tooltipPosition="bottom" *ngIf="secCheck('REPORT_PDF')"></button>
+            <button pButton pRipple label="Xls" icon="pi pi-file-excel" class="p-button-info ml-2" (click)="downloadReport('xls')" pTooltip="Scarica Xls" tooltipPosition="bottom" *ngIf="secCheck('REPORT_XLS')"></button>
+            <button pButton pRipple label="Csv" icon="pi pi-file" class="p-button-info ml-2" (click)="downloadReport('csv')" pTooltip="Scarica Csv" tooltipPosition="bottom" *ngIf="secCheck('REPORT_CSV')"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="fiores" [rows]="defaultRows" [paginator]="true"
+        [lazy]="true" (onLazyLoad)="loadListEvent($event)"  [totalRecords]="totalRecords" [loading]="loading"
+        [rowsPerPageOptions]="[10,25,50,100]" [(selection)]="selectedFiores" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Elementi da {first} a {last} di {totalRecords} elementi totali" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h3 class="mb-2">Gestione Fiore</h3>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Cerca..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="fioreId">FioreId <p-sortIcon field="fioreId"></p-sortIcon></th>
+                <th pSortableColumn="nome">Nome <p-sortIcon field="nome"></p-sortIcon></th>
+                <th pSortableColumn="prezzo">Prezzo <p-sortIcon field="prezzo"></p-sortIcon></th>
+
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-fiore>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="fiore"></p-tableCheckbox>
+                </td>
+                <td>{{fiore.fioreId}}</td>
+                <td>{{fiore.nome}}</td>
+                <td>{{fiore.prezzo}}</td>
+
+                <td>
+                	<button pButton pRipple icon="pi pi-eye" class="p-button-text p-button-primary mr-2" (click)="detailElement(fiore)" pTooltip="Mostra dettagli" tooltipPosition="top" *ngIf="secCheck('BY_ID')"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-text p-button-primary mr-2" (click)="editElement(fiore)" pTooltip="Modifica" tooltipPosition="top" *ngIf="secCheck('UPDATE')"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-text p-button-primary" (click)="deleteElement(fiore)" pTooltip="Elimina" tooltipPosition="top" *ngIf="secCheck('DELETE')"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                Elementi totali: {{totalRecords}}
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="fioreDialog" [style]="{width: '650px'}" header="Dettagli Fiore" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="fioreId">FioreId</label>
+            <p-inputNumber id="fioreId" inputId="integeronly" [(ngModel)]="fiore.fioreId"  ></p-inputNumber>
+        </div>
+        <div class="field">
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" pInputText [(ngModel)]="fiore.nome"   autofocus> 
+        </div>
+        <div class="field">
+            <label for="prezzo">Prezzo</label>
+            <input id="prezzo" type="text" pInputText [(ngModel)]="fiore.prezzo"  > 
+        </div>
+
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Annulla" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Salva" icon="pi pi-check" class="p-button-text" (click)="saveElement()" *ngIf="secCheck('CREATE')"></button>
+    </ng-template>
+</p-dialog>
+
+
+<p-confirmDialog [style]="{width: '550px'}" acceptLabel="Si"></p-confirmDialog>
+<app-error-page *ngIf="errorCode" [inputCode]="errorCode"></app-error-page>

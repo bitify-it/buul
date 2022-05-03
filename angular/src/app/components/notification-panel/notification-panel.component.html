@@ -1,0 +1,12 @@
+<p-listbox [options]="notifications" [(ngModel)]="selectedNotification" [multiple]="true" optionLabel="name" [listStyle]="{'max-height':'250px'}">
+    <ng-template let-notification pTemplate="item">
+        <div class="notification-item">
+            <div class="single-notification">
+                <div>
+                    <p-avatar image="assets/images/user.jpg" styleClass="p-mr-2" shape="circle" ></p-avatar>
+                </div>
+                <div style="margin-top: 8px;margin-left: 8px;">{{notification.name}}</div>
+            </div>
+        </div>
+    </ng-template>
+</p-listbox>

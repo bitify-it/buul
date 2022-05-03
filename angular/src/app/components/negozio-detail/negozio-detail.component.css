@@ -1,0 +1,9 @@
+.negozio-details .p-disabled, .negozio-details .p-component:disabled {
+    opacity: 0.78 !important;
+}
+
+:host ::ng-deep .p-component:disabled {
+    opacity: 0.78 !important;
+}
+
+

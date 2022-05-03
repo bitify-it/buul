@@ -1,0 +1,66 @@
+<p-toast position="top-center"></p-toast>
+<p-card class="sec-privilege-details details" [hidden]=(loading)>
+
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <i id="back-icon" class="pi pi-chevron-circle-left mr-3" style="font-size: 1.8rem;cursor: pointer;" (click)="back()" pTooltip="Indietro" tooltipPosition="top"></i>
+            <h2>SecPrivilege: {{secPrivilege.id}}</h2>
+            <i id="status-icon" class="pi pi-lock ml-2" style="font-size: 1.4rem;"></i>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <div class="d-flex flex-wrap">
+                <button pButton pRipple label="Modifica" icon="pi pi-pencil" class="p-button-info mr-2 mb-2" (click)="enableEdit()" [hidden]=(edit)></button>
+                <button pButton pRipple label="Annulla" icon="pi pi-times" class="p-button-info mr-2 mb-2" (click)="disableEdit()" [hidden]=(!edit)></button>
+                <button pButton pRipple label="Salva" icon="pi pi-save" class="p-button-success mr-2 mb-2" (click)="save()" [hidden]=(!edit)></button>
+                <button pButton pRipple label="Elimina" icon="pi pi-trash" class="p-button-danger mr-2 mb-2" (click)="deleteElement(secPrivilege)" [hidden]=(!edit)></button>
+            </div>
+        </ng-template>
+    </p-toolbar>
+    
+    <div class="p-fluid formgrid grid">
+        
+        <div class="field col-12 md:col-12 lg:col-12 xl:col-6">
+            <label for="id">Id</label>
+            <p-inputNumber id="id" inputId="integeronly" [(ngModel)]="secPrivilege.id" [disabled]="!edit" ></p-inputNumber>
+        </div>
+
+        <div class="field col-12 md:col-12 lg:col-12 xl:col-6">
+            <label for="name">Name</label>
+            <input id="name" type="text" pInputText [(ngModel)]="secPrivilege.name" [disabled]="!edit" required > 
+            <small class="p-invalid" *ngIf="submitted && secPrivilegeValidation.controls['name'].errors">{{getValidationMessage(secPrivilegeValidation.controls.name)}}</small>
+        </div>
+
+    </div>
+    <p-tabView>
+
+ 
+    </p-tabView>
+
+    <p-confirmDialog [style]="{width: '550px'}" acceptLabel="Si"></p-confirmDialog>
+
+</p-card>
+
+<p-card [hidden]="!loading">
+    <div class="skeleton" >
+        <div class="grid formgrid">
+            <div class="field col-12 md:col-12 lg:col-12 xl:col-6">
+                <p-skeleton width="10rem" height="1rem" styleClass="mb-4"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  ></p-skeleton>
+            </div>
+            <div class="field col-12 md:col-12 lg:col-12 xl:col-6">
+                <p-skeleton width="10rem" height="1rem" styleClass="mb-4"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem" styleClass="mb-3"></p-skeleton>
+                <p-skeleton height="2rem"  ></p-skeleton>
+            </div>
+        </div>
+    </div>
+</p-card>

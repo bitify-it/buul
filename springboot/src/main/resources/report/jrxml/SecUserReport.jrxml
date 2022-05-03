@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="esame-rpt" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.2"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="title" class="java.lang.String"/>
+	
+	<field name="id" class="java.lang.Long"/>
+<field name="username" class="java.lang.String"/>
+<field name="email" class="java.lang.String"/>
+<field name="password" class="java.lang.String"/>
+<field name="pin" class="java.lang.String"/>
+<field name="secroles" class="java.util.List"/>
+
+	
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="800" height="20"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+<reportElement x="0" y="1" width="70" height="20"/>
+<box leftPadding="0">
+	<pen lineWidth="0.25"/>
+	<topPen lineWidth="0.25"/>
+	<leftPen lineWidth="0.25"/>
+	<bottomPen lineWidth="0.25"/>
+	<rightPen lineWidth="0.25"/>
+</box>
+<textElement textAlignment="Center">
+	<font size="10" isBold="true"/>
+</textElement>
+<text><![CDATA[ID]]></text>
+</staticText>
+<staticText>
+<reportElement x="70" y="1" width="70" height="20"/>
+<box leftPadding="0">
+	<pen lineWidth="0.25"/>
+	<topPen lineWidth="0.25"/>
+	<leftPen lineWidth="0.25"/>
+	<bottomPen lineWidth="0.25"/>
+	<rightPen lineWidth="0.25"/>
+</box>
+<textElement textAlignment="Center">
+	<font size="10" isBold="true"/>
+</textElement>
+<text><![CDATA[USERNAME]]></text>
+</staticText>
+<staticText>
+<reportElement x="140" y="1" width="70" height="20"/>
+<box leftPadding="0">
+	<pen lineWidth="0.25"/>
+	<topPen lineWidth="0.25"/>
+	<leftPen lineWidth="0.25"/>
+	<bottomPen lineWidth="0.25"/>
+	<rightPen lineWidth="0.25"/>
+</box>
+<textElement textAlignment="Center">
+	<font size="10" isBold="true"/>
+</textElement>
+<text><![CDATA[EMAIL]]></text>
+</staticText>
+<staticText>
+<reportElement x="210" y="1" width="70" height="20"/>
+<box leftPadding="0">
+	<pen lineWidth="0.25"/>
+	<topPen lineWidth="0.25"/>
+	<leftPen lineWidth="0.25"/>
+	<bottomPen lineWidth="0.25"/>
+	<rightPen lineWidth="0.25"/>
+</box>
+<textElement textAlignment="Center">
+	<font size="10" isBold="true"/>
+</textElement>
+<text><![CDATA[PASSWORD]]></text>
+</staticText>
+<staticText>
+<reportElement x="280" y="1" width="70" height="20"/>
+<box leftPadding="0">
+	<pen lineWidth="0.25"/>
+	<topPen lineWidth="0.25"/>
+	<leftPen lineWidth="0.25"/>
+	<bottomPen lineWidth="0.25"/>
+	<rightPen lineWidth="0.25"/>
+</box>
+<textElement textAlignment="Center">
+	<font size="10" isBold="true"/>
+</textElement>
+<text><![CDATA[PIN]]></text>
+</staticText>
+
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+	<reportElement x="0" y="0" width="70" height="20"/>
+	<box leftPadding="0">
+		<pen lineWidth="0.25"/>
+		<topPen lineWidth="0.25"/>
+		<leftPen lineWidth="0.25"/>
+		<bottomPen lineWidth="0.25"/>
+		<rightPen lineWidth="0.25"/>
+	</box>
+	<textElement textAlignment="Center"/>
+	<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+</textField>
+<textField>
+	<reportElement x="70" y="0" width="70" height="20"/>
+	<box leftPadding="0">
+		<pen lineWidth="0.25"/>
+		<topPen lineWidth="0.25"/>
+		<leftPen lineWidth="0.25"/>
+		<bottomPen lineWidth="0.25"/>
+		<rightPen lineWidth="0.25"/>
+	</box>
+	<textElement textAlignment="Center"/>
+	<textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+</textField>
+<textField>
+	<reportElement x="140" y="0" width="70" height="20"/>
+	<box leftPadding="0">
+		<pen lineWidth="0.25"/>
+		<topPen lineWidth="0.25"/>
+		<leftPen lineWidth="0.25"/>
+		<bottomPen lineWidth="0.25"/>
+		<rightPen lineWidth="0.25"/>
+	</box>
+	<textElement textAlignment="Center"/>
+	<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+</textField>
+<textField>
+	<reportElement x="210" y="0" width="70" height="20"/>
+	<box leftPadding="0">
+		<pen lineWidth="0.25"/>
+		<topPen lineWidth="0.25"/>
+		<leftPen lineWidth="0.25"/>
+		<bottomPen lineWidth="0.25"/>
+		<rightPen lineWidth="0.25"/>
+	</box>
+	<textElement textAlignment="Center"/>
+	<textFieldExpression><![CDATA[$F{password}]]></textFieldExpression>
+</textField>
+<textField>
+	<reportElement x="280" y="0" width="70" height="20"/>
+	<box leftPadding="0">
+		<pen lineWidth="0.25"/>
+		<topPen lineWidth="0.25"/>
+		<leftPen lineWidth="0.25"/>
+		<bottomPen lineWidth="0.25"/>
+		<rightPen lineWidth="0.25"/>
+	</box>
+	<textElement textAlignment="Center"/>
+	<textFieldExpression><![CDATA[$F{pin}]]></textFieldExpression>
+</textField>
+<!-- Aggiungere parametro <parameter name="title_sub" class="java.lang.String"/>-->
+<!--<subreport>
+    <reportElement positionType="Float" x="0" y="0" width="800" height="20" uuid="f3063ed3-775f-47df-8306-a939aecc9d89"/>
+    <subreportParameter name="title">
+    	  <subreportParameterExpression><![CDATA[$P{title_sub}]]></subreportParameterExpression>
+	   </subreportParameter>    <dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{secroles})]]></dataSourceExpression>
+    <subreportExpression><![CDATA["src/main/resources/report/jasper/secroleReport.jasper"]]></subreportExpression>
+</subreport>-->
+
+		</band>
+	</detail>
+</jasperReport>

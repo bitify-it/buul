@@ -1,0 +1,48 @@
+nav{
+    background-color:var(--color-main);
+    height: 80px;
+    padding: 10px 30px;
+    vertical-align: middle;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+ }
+ nav i{
+     cursor: pointer;
+ }
+ .left-area{
+     display: flex;
+     color: white;
+     margin-top: 7px;
+ }
+ .navbar-title{
+     font-size: 2.4rem;
+     font-weight: bold;
+ }
+ .left-area i{
+     font-size: 20px;
+ }
+ .right-area{
+     position: absolute;
+     right: 40px;
+     top: 18px;
+     display: flex;
+ }
+ .right-area-item{
+     margin-left: 20px;
+     cursor: pointer;
+ }
+ 
+ .sidebar-icon i{
+     margin-top: 13px;
+     margin-left: 43px;
+ }
+ 
+ .sidebar-icon-mobile i{
+     display: none;
+     margin-right: 15px;
+     margin-top: 6px;
+     font-size: 2rem;
+ 
+ }
+ 

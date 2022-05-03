@@ -1,0 +1,122 @@
+/* You can add global styles to this file, and also import other style files */
+
+body{
+    margin:0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+.global-font {
+    font-family: Raleway /* Replace with your custom font */, sans-serif; 
+  }
+
+[hidden] { display: none !important;}
+
+@media only screen and (max-width: 700px) {
+
+    .sidebar-icon-mobile i{
+        display: block !important;
+    }
+
+    .sidebar-icon i{
+        display: none;
+    }
+
+    nav {
+        padding: 10px 20px !important;
+    }
+
+    nav .p-avatar.p-avatar-lg {
+        width: 2.4rem;
+        height: 2.4rem;
+        font-size: 1.5rem;
+        margin-top: 2px;
+    }
+
+    .navbar-title{
+        font-size: 1.7rem !important;
+        font-weight: bold;
+        margin-top: 6px;
+    }
+
+    .right-area{
+        right: 20px !important;
+    }
+    .mobile-closed{
+        height: 0;
+        transition: opacity 1s ease-out;
+        opacity: 0;
+    }
+    .mobile-opened{
+        display: block;
+        opacity: 1;
+    }
+
+    .body-mobile-opened{
+        margin-top: 0px !important;
+    }
+
+    .container{
+        display: block !important;
+    }
+
+    .container .main-body{
+        width: calc(100% - 0px) !important;
+        overflow: hidden;
+    }
+
+    .container aside{
+        width: auto !important;
+    }
+
+    .p-toolbar-group-right {
+        margin-top: 10px;
+    }
+
+    .p-breadcrumb .p-menuitem-link {
+        padding: 0 !important;
+        font-size: 12px;
+    }
+
+    .details .p-toolbar {
+        padding: 0.1rem !important;
+    }
+    
+    
+  }
+
+
+/*PrimeNg Customization*/
+
+/*NavBar*/
+.p-panelmenu-panel{
+    box-shadow: none;
+}
+.p-panelmenu .p-panelmenu-header > a .p-menuitem-icon {
+    margin-right: 0.9rem;
+}
+.p-panelmenu .p-panelmenu-header > a {
+    background: none;
+}
+.p-panelmenu .p-panelmenu-content .p-menuitem .p-menuitem-link {
+    padding: 0.75rem 1.2rem;
+}
+.p-menuitem-icon {
+    margin-right: 1rem;
+}
+
+/*NavBar -> Notifications*/
+.p-overlaypanel:after, .p-overlaypanel:before{
+    display: none;
+}
+.p-overlaypanel .p-overlaypanel-content {
+    padding: 0.3rem !important;
+}
+.p-listbox {
+    border: 0px solid #e5e5e5 !important;
+}
+/*NavBar -> User Profile*/
+.p-menu {
+    border: 0px solid #e5e5e5 !important;
+}
+
+

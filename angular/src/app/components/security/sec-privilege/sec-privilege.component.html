@@ -1,0 +1,87 @@
+<p-toast position="top-center"></p-toast>
+
+<div class="card" *ngIf="!errorCode">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Nuovo" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()" pTooltip="Crea nuovo" tooltipPosition="bottom"></button>
+            <button pButton pRipple label="" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedElements()" [disabled]="!selectedSecPrivileges || !selectedSecPrivileges.length" pTooltip="Elimina selezionati" tooltipPosition="bottom"></button>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+            <!--<p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 p-d-inline-block"></p-fileUpload>-->
+            <button pButton pRipple label="Pdf" icon="pi pi-file-pdf" class="p-button-info" (click)="downloadReport('pdf')" pTooltip="Scarica Pdf" tooltipPosition="bottom"></button>
+            <button pButton pRipple label="Xls" icon="pi pi-file-excel" class="p-button-info ml-2" (click)="downloadReport('xls')" pTooltip="Scarica Xls" tooltipPosition="bottom"></button>
+            <button pButton pRipple label="Csv" icon="pi pi-file" class="p-button-info ml-2" (click)="downloadReport('csv')" pTooltip="Scarica Csv" tooltipPosition="bottom"></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table #dt [value]="secPrivileges" [rows]="defaultRows" [paginator]="true"
+        [lazy]="true" (onLazyLoad)="loadListEvent($event)"  [totalRecords]="totalRecords" [loading]="loading"
+        [rowsPerPageOptions]="[10,25,50,100]" [(selection)]="selectedSecPrivileges" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Elementi da {first} a {last} di {totalRecords} elementi totali" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h3 class="mb-2">Gestione SecPrivilege</h3>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Cerca..." />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+                <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-secPrivilege>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="secPrivilege"></p-tableCheckbox>
+                </td>
+                <td>{{secPrivilege.id}}</td>
+                <td>{{secPrivilege.name}}</td>
+
+                <td>
+                	<button pButton pRipple icon="pi pi-eye" class="p-button-text p-button-primary mr-2" (click)="detailElement(secPrivilege)" pTooltip="Mostra dettagli" tooltipPosition="top"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-text p-button-primary mr-2" (click)="editElement(secPrivilege)" pTooltip="Modifica" tooltipPosition="top"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-text p-button-primary" (click)="deleteElement(secPrivilege)" pTooltip="Elimina" tooltipPosition="top"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                Elementi totali: {{totalRecords}}
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="secPrivilegeDialog" [style]="{width: '650px'}" header="Dettagli SecPrivilege" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="id">Id</label>
+            <p-inputNumber id="id" inputId="integeronly" [(ngModel)]="secPrivilege.id"  ></p-inputNumber>
+        </div>
+        <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" pInputText [(ngModel)]="secPrivilege.name" required  autofocus> 
+            <small class="p-invalid" *ngIf="submitted && secPrivilegeValidation.controls['name'].errors">{{getValidationMessage(secPrivilegeValidation.controls.name)}}</small>
+        </div>
+
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Annulla" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Salva" icon="pi pi-check" class="p-button-text" (click)="saveElement()"></button>
+    </ng-template>
+</p-dialog>
+
+
+<p-confirmDialog [style]="{width: '550px'}" acceptLabel="Si"></p-confirmDialog>
+<app-error-page *ngIf="errorCode" [inputCode]="errorCode"></app-error-page>

@@ -1,0 +1,116 @@
+<div class="grid">
+    <div class="col-12 md:col-6 lg:col-6 xl:col-3">
+        <p-card> 
+            <div class="card">
+                <div class="card-statistiche">
+                    <div class="card-icon">
+                        <i class="pi pi-user" style="font-size: 4rem"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-titolo">Utenti</div>
+                        <div class="card-valore">1243</div>
+                    </div>
+                </div>
+            </div>
+        </p-card>
+    </div>
+    <div class="col-12 md:col-6 lg:col-6 xl:col-3">
+        <p-card> 
+            <div class="card">
+                <div class="card-statistiche">
+                    <div class="card-icon">
+                        <i class="pi pi-envelope" style="font-size: 4rem"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-titolo">Messaggi</div>
+                        <div class="card-valore">135</div>
+                    </div>
+                </div>
+            </div>
+        </p-card>
+    </div>
+    <div class="col-12 md:col-6 lg:col-6 xl:col-3">
+        <p-card> 
+            <div class="card">
+                <div class="card-statistiche">
+                    <div class="card-icon">
+                        <i class="pi pi-check-square" style="font-size: 4rem"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-titolo">Task Conclusi</div>
+                        <div class="card-valore">4563</div>
+                    </div>
+                </div>
+            </div>
+        </p-card>
+    </div>
+    <div class="col-12 md:col-6 lg:col-6 xl:col-3">
+        <p-card> 
+            <div class="card">
+                <div class="card-statistiche">
+                    <div class="card-icon">
+                        <i class="pi pi-list" style="font-size: 4rem"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-titolo">Task da lavorare</div>
+                        <div class="card-valore">45</div>
+                    </div>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>
+
+<div class="grid">
+    <div class="col-12 md:col-12 lg:col-6">
+        <p-card> 
+            <div class="card">
+                <h5>Bar</h5>
+                <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+            </div>
+        </p-card>
+    </div>
+    <div class="col-12 md:col-12 lg:col-6">
+        <p-card> 
+            <div class="card">
+                <h5>Linee</h5>
+                <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
+            </div>
+        </p-card>
+    </div>
+</div>
+
+<div class="grid">
+    <div class="col-12 md:col-12 lg:col-6">
+        <p-card> 
+            <div class="card">
+                <h5>Bar</h5>
+                <p-chart type="bar" [data]="basicData" [options]="basicOptions"></p-chart>
+            </div>
+        </p-card>
+    </div>
+    <div class="col-12 md:col-6 lg:col-3">
+        <p-card> 
+            <div class="card">
+                <h5>Ciambella</h5>
+                <p-chart type="doughnut" [data]="data" [options]="chartOptions"></p-chart>
+            </div>
+        </p-card>
+    </div>
+    <div class="col-12 md:col-6 lg:col-3">
+        <p-card> 
+            <div class="card">
+                <h5>Torta</h5>
+                <p-chart type="pie" [data]="data" [options]="chartOptions"></p-chart>
+            </div>
+        </p-card>
+    </div>
+</div>
+
+
+    <p-card> 
+        <div class="card">
+            <h5>Linee</h5>
+            <p-chart type="line" [data]="basicData" [options]="basicOptions"></p-chart>
+        </div>
+    </p-card>

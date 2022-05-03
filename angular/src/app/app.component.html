@@ -1,0 +1,20 @@
+<!-- Toolbar -->
+<app-navbar (toggleSideBar)="toggleSideBar()" (initApp)="ngOnInit()" (toggleSideBarMobile)="toggleSideBarMobile()" (closeSideBarMobile)="closeSideBarMobile()" *ngIf="isLoggedIn$ | async as isLoggedIn"></app-navbar>
+
+<section class="container" *ngIf="isLoggedIn$ | async as isLoggedIn">
+	<aside [ngClass]="{'expanding': isExpanding, 'mobile-closed': !isMobile, 'mobile-opened': isMobile}">
+    <app-sidebar></app-sidebar>
+  </aside>
+	<div class="main-body" [ngClass]="{'body-expanding': isExpanding, 'body-mobile-closed': !isMobile, 'body-mobile-opened': isMobile}">
+    <app-breadcrumb></app-breadcrumb>
+    <router-outlet></router-outlet>
+    <br>
+    <app-footer></app-footer>
+	</div>
+</section>
+
+
+<section *ngIf="!(isLoggedIn$ | async)as isLoggedIn">
+  <app-access></app-access>
+</section>
+

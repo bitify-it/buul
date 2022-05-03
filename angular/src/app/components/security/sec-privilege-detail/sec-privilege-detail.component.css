@@ -1,0 +1,9 @@
+.sec-privilege-details .p-disabled, .sec-privilege-details .p-component:disabled {
+    opacity: 0.78 !important;
+}
+
+:host ::ng-deep .p-component:disabled {
+    opacity: 0.78 !important;
+}
+
+

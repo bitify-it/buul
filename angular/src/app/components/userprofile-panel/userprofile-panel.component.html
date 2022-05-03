@@ -1,0 +1,32 @@
+
+<div class="profile-menu" *ngIf="isLoggedIn">
+<h4 style="margin-left: 10px; margin-bottom: 0px;">Ciao {{username | titlecase}}</h4>
+<p-menu [model]="items"></p-menu>
+</div>
+
+<form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && accedi()" #f="ngForm"  novalidate>
+    <div class="form-group login-form">
+        <h4>LogIn</h4>
+        <h5 class="p-error" *ngIf="isLoginFailed">Username e/o Password errate </h5>
+        <span class="p-float-label p-input-icon-right p-field">
+            <i class="pi pi-user"></i>
+            <input type="text" pInputText [(ngModel)]="form.username" aria-describedby="username2-help" required #username="ngModel" name="username"> 
+            <label for="float-input">Username</label>
+        </span>
+        <small id="username2-help" class="p-error" style="display: block;" *ngIf="username.errors && f.submitted">
+            Username è obbligatoria.
+        </small>
+        <span class="p-float-label mt-3">
+            <p-password [toggleMask]="true" name="password"
+            [(ngModel)]="form.password"
+            required
+            minlength="6"
+            #password="ngModel" [feedback]="false"></p-password>
+            <label for="float-input">Password</label>
+        </span>
+        <small id="username2-help" class="p-error" style="display: block;" *ngIf="password.errors && f.submitted">
+            Password è obbligatoria.
+        </small>
+        <button pButton type="button" label="Accedi" class="p-button-info mt-3" type="submit"></button>
+    </div>
+</form>
